@@ -1,0 +1,305 @@
+<!-- ==================== Documento / Metadados ==================== -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <title>Blockock Fraiburgo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- ==================== CSS / Ícones ==================== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="brickButton.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+  <!-- ==================== Hero 3D ==================== -->
+  <section class="hero-3d" id="sobre">
+    <canvas class="obj3d"></canvas>
+    <div class="hero-copy">
+      <h1>Sobre a Empresa</h1>
+      <p>Com <strong>25 anos</strong> de experiência no ramo lajeiro, a AMS Lajes consolidou-se como referência em qualidade e confiança
+        na construção civil. Há quase 5 anos, a empresa atua também como franqueada da tecnologia Blocok, trazendo
+        inovação e eficiência para obras de diferentes portes.
+        Mais do que fornecer produtos, a AMS se diferencia pelo suporte técnico especializado, oferecendo engenheiro em
+        tempo integral, treinamentos, acompanhamento de obras e visitas de rotina. Dessa forma, cada projeto é conduzido
+        com segurança, agilidade e excelência do início ao fim.</p>
+    </div>
+  </section>
+
+  <!-- ==================== Navegação (Sticky) ==================== -->
+  <nav class="nav-sticky">
+    <a href="#orcamento">Agende um orçamento já</a>
+    <div class="href-nav-group">
+      <a href="#sobre">Sobre a Empresa</a>
+      <a href="#produto">O Produto: Blockok</a>
+      <a href="">
+        <img src="https://www.amslajes.com.br/public/img/logo.svg" height="50">
+      </a>
+      <a href="#vantagens">Vantagens do Blockok</a>
+      <a href="#aplicacoes">Aplicações</a>
+    </div>
+    <a href="https://wa.me/554999323909?text=Ol%C3%A1%2C%20Gostaria%20de%20agendar%20um%20or%C3%A7amento!%20Vim%20pelo%20Site" target="_blank" rel="noopener">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div id="mobile-menu" class="mobile-drawer" hidden>
+      <nav class="mobile-drawer__nav">
+        <a href="#sobre">Sobre a Empresa</a>
+        <a href="#produto">O Produto: Blockok</a>
+        <a href="#vantagens">Vantagens do Blockok</a>
+        <a href="#aplicacoes">Aplicações</a>
+      </nav>
+    </div>
+  </nav>
+
+  <!-- ==================== Produto / Métricas (Canvas 2) ==================== -->
+  <section class="container-metrics-section" id="produto">
+    <div>
+      <div class="container-metrics-copy">
+        <h1>O Produto: Blocok</h1>
+        <p>O <strong>Blocok</strong> é um bloco de vedação inovador, desenvolvido para substituir os sistemas
+          tradicionais de alvenaria.</p>
+        <p>Ele é composto por um núcleo de <strong>EPS classe F</strong>, que não propaga chamas, revestido por
+          <strong>1,5 cm de microconcreto em cada lado</strong>, funcionando como reboco incorporado.</p>
+        <p>Cada unidade mede <strong>90 x 90 cm</strong>, pesa cerca de <strong>47 kg</strong> e está disponível em
+          quatro espessuras — <strong>10, 13, 15 e 20 cm</strong> — sempre com função de vedação não estrutural.</p>
+      </div>
+    </div>
+    <canvas class="obj3d-2"></canvas>
+  </section>
+
+  <!-- ==================== Vantagens ==================== -->
+  <section class="advantages-section py-5" id="vantagens">
+    <div class="container">
+      <h2 class="text-center mb-5">Vantagens do Blocok</h2>
+      <div class="row g-4 text-center">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm p-4 card-advantages">
+            <div>
+              <i class="bi bi-shield-check text-orange fs-1 mb-3"></i>
+              <h5 class="fw-bold">Resistência e leveza</h5>
+              <p>Suporta compressão de até <b>12 MPa</b>, ao mesmo tempo em que reduz significativamente o peso das paredes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm p-4 card-advantages">
+            <div>
+              <i class="bi bi-building text-orange fs-1 mb-3"></i>
+              <h5 class="fw-bold">Economia estrutural</h5>
+              <p>Uma parede em Blocok pesa, em média, <b>98 kg/m²</b>, enquanto a convencional chega a <b>250 kg/m²</b>, reduzindo carga estrutural e reforços.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm p-4 card-advantages">
+            <div>
+              <i class="bi bi-lightning-charge text-orange fs-1 mb-3"></i>
+              <h5 class="fw-bold">Rapidez na execução</h5>
+              <p>A obra se torna mais ágil, demandando menos etapas e materiais adicionais como reboco e ferragens.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm p-4 card-advantages">
+            <div>
+              <i class="bi bi-soundwave text-orange fs-1 mb-3"></i>
+              <h5 class="fw-bold">Isolamento térmico e acústico</h5>
+              <p>Garante maior conforto para os ambientes, com eficiência térmica e sonora.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm p-4 card-advantages">
+            <div>
+              <i class="bi bi-brush text-orange fs-1 mb-3"></i>
+              <h5 class="fw-bold">Acabamento prático</h5>
+              <p>Após o assentamento, basta o tratamento das juntas e a aplicação de uma massa de correção escolhida pelo cliente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Aplicações ==================== -->
+  <section id="aplicacoes" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Aplicações</h2>
+      <p class="text-center mb-5">
+        O sistema Blocok é ideal para diferentes tipos de obras:
+      </p>
+
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <div class="card h-100 border-0 shadow-sm card-applications">
+            <div class="card-body text-center p-4 applications">
+              <i class="fas fa-home fa-2x text-orange mb-3" aria-hidden="true"></i>
+              <span class="division-line"></span>
+              <div>
+                <h5 class="fw-bold mb-2">Residenciais</h5>
+                <p class="mb-0 text-muted">Casas, sobrados e condomínios.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 border-0 shadow-sm card-applications">
+            <div class="card-body text-center p-4 applications">
+              <i class="fas fa-building fa-2x text-orange mb-3" aria-hidden="true"></i>
+              <span class="division-line"></span>
+              <div>
+                <h5 class="fw-bold mb-2">Comerciais</h5>
+                <p class="mb-0 text-muted">Lojas, galpões e escritórios.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 border-0 shadow-sm card-applications">
+            <div class="card-body text-center p-4 applications">
+              <i class="fas fa-industry fa-2x text-orange mb-3" aria-hidden="true"></i>
+              <span class="division-line"></span>
+              <div>
+                <h5 class="fw-bold mb-2">Industriais</h5>
+                <p class="mb-0 text-muted">Fábricas, depósitos e estruturas de maior porte.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-5 text-center">
+        Graças à união da tradição da <strong>AMS Lajes</strong> e da tecnologia <strong>Blocok</strong>, cada aplicação resulta em um sistema construtivo moderno, econômico e confiável — ideal para quem busca qualidade e eficiência.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Divisor ==================== -->
+  <hr id="division-line-hr">
+
+  <!-- ==================== Orçamento / Formulário ==================== -->
+  <section id="orcamento" class="py-5">
+    <div class="container">
+      <div class="row align-items-stretch g-4">
+        <div class="col-12 col-lg-5">
+          <div class="h-100 d-flex flex-column justify-content-center">
+            <h2 class="mb-3">Agende um Orçamento</h2>
+            <p>
+              Sua obra merece um sistema inteligente e seguro. Entre em contato com a AMS Lajes e descubra como o Blocok pode transformar o seu projeto.
+            </p>
+
+            <div class="d-grid gap-2 mt-3">
+              <a class="btn btn-dark" href="tel:+5549999323909">
+                <i class="fas fa-phone-alt me-2" aria-hidden="true"></i> Ligue para (49) 9 9932-3909
+              </a>
+
+              <a
+                class="btn btn-orange"
+                href="https://wa.me/554999323909?text=Ol%C3%A1%2C%20Gostaria%20de%20agendar%20um%20or%C3%A7amento!%20Vim%20pelo%20Site"
+                target="_blank" rel="noopener"
+              >
+                <i class="fab fa-whatsapp me-2" aria-hidden="true"></i> Fale agora pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4 p-md-5">
+              <h5 class="fw-bold mb-3">Envie um e-mail</h5>
+              <form id="orcamento-form" action="https://formspree.io/f/mdklrkgn" method="POST">
+                <input type="hidden" name="_subject" value="Solicitação de Orçamento — Site Blocok" />
+                <input type="hidden" name="_language" value="pt-BR" />
+
+                <div class="mb-3">
+                  <label for="contato_email" class="form-label">Seu e-mail</label>
+                  <input type="email" class="form-control" id="contato_email" name="email" placeholder="seuemail@exemplo.com.br" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="contato_mensagem" class="form-label">Descrição do projeto</label>
+                  <textarea class="form-control" id="contato_mensagem" name="message" rows="5" placeholder="Nos conte mais de como deseja elevar o nível da sua contrução..." required></textarea>
+                </div>
+
+                <div class="d-grid d-sm-flex gap-2">
+                  <button class="btn-wall" type="submit" aria-label="Enviar mensagem">
+                    <span class="btn-wall__label">Enviar mensagem</span>
+                    <span class="btn-wall__grid" aria-hidden="true"></span>
+                  </button>
+                  <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+                </div>
+
+                <p id="status" class="mt-3 mb-0 text-muted" style="font-size:0.925rem;"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Rodapé ==================== -->
+  <footer class="site-footer py-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-12 col-md-4">
+          <img src="https://www.amslajes.com.br/public/img/logo.svg" alt="AMS Lajes" height="50" class="mb-3">
+          <p class="text-muted">
+            A AMS Lajes atua há 25 anos no ramo lajeiro e é franqueada da tecnologia Blocok.
+            Inovação, eficiência e suporte técnico especializado para sua obra.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <h5 class="fw-bold mb-3">Navegação</h5>
+          <ul class="list-unstyled">
+            <li><a href="#sobre" class="footer-link">Sobre a Empresa</a></li>
+            <li><a href="#produto" class="footer-link">O Produto: Blocok</a></li>
+            <li><a href="#vantagens" class="footer-link">Vantagens do Blocok</a></li>
+            <li><a href="#aplicacoes" class="footer-link">Aplicações</a></li>
+            <li><a href="#orcamento" class="footer-link">Agende um Orçamento</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <h5 class="fw-bold mb-3">Contato</h5>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-telephone-fill me-2 text-orange"></i> <a href="tel:+5549999323909" class="footer-link">(49) 9932-3909</a></li>
+            <li><i class="bi bi-whatsapp me-2 text-orange"></i> <a href="https://wa.me/554999323909?text=Ol%C3%A1%2C%20Gostaria%20de%20agendar%20um%20or%C3%A7amento!%20Vim%20pelo%20Site" target="_blank" class="footer-link">(49) 9932-3909</a></li>
+            <li><i class="bi bi-envelope-fill me-2 text-orange"></i> <a href="mailto:contato@amslajes.com.br" class="footer-link">contato@amslajes.com.br</a></li>
+            <li><i class="bi bi-geo-alt-fill me-2 text-orange"></i> Fraiburgo – SC</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="text-center small text-muted">
+        © 2025 AMS. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== Scripts ==================== -->
+  <script src="brickButton.js"></script>
+  <script src="email.js"></script>
+  <script src="https://unpkg.com/three@0.146.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+:root{
+  /* Aparência */
+  --mortar:#afafaf;
+  --brick:#ff4c09;
+  --brick2:#e94408;
+  --border:#ff4c09;
+  --text:#fff;
+  --text-idle:#ff4c09;
+
+  /* Geometria */
+  --rows:7;
+  --cols:9;
+  --brick-h:10px;
+  --ratio:2.4;
+  --joint:2px;
+
+  /* Animação */
+  --fall:80ms;
+  --interval:25ms;
+}
+
+
+.btn-wall{
+  position:relative;
+  display:inline-grid;
+  place-items:center;
+  padding:14px 24px;
+  border-radius:20px;
+  border:2px solid var(--border);
+  background:#fff;
+  color:var(--text-idle);
+  font-weight:600;
+  cursor:pointer;
+  overflow:hidden;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+  transition:transform .15s ease, box-shadow .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn-wall:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 20px rgba(0,0,0,.12);
+  color:var(--text);
+}
+
+.btn-wall__label{
+  position:relative;
+  z-index:2;
+  white-space:nowrap;
+}
+
+.btn-wall__grid{
+  position:absolute;
+  inset:0;
+  background:#fff;
+  display:grid;
+  grid-auto-flow:dense;
+  grid-template-rows:repeat(var(--rows), var(--brick-h));
+  grid-template-columns:repeat(calc(var(--cols)*2), calc(var(--brick-h)*var(--ratio)/2));
+  gap:var(--joint);
+  z-index:1;
+  pointer-events:none;
+}
+.btn-wall:hover .btn-wall__grid{ background:var(--mortar); }
+
+.brick{
+  background:linear-gradient(180deg, var(--brick) 0%, var(--brick) 65%, var(--brick2) 66%, var(--brick2) 100%);
+  border-radius:3px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06), 0 1px 0 rgba(255,255,255,.25) inset;
+  transform:translateY(-140%);
+  opacity:0;
+}
+
+.btn-outline-secondary{
+  border-radius: 20px;
+  width: 100px;
+}
+
+#orcamento-form input::placeholder, #orcamento-form textarea::placeholder {
+  opacity: 45%;
+}
+
+/* ENTRADA (hover) */
+.btn-wall:hover .brick{
+  animation:fall var(--fall) cubic-bezier(.2,.7,.2,1) var(--delay,0ms) forwards;
+  animation-delay:var(--delay);
+}
+
+/* SAÍDA (hover-out) – só quando já houve hover */
+.btn-wall.armed:not(:hover) .brick{
+  animation:rise var(--fall) cubic-bezier(.2,.7,.2,1) var(--reverse-delay,0ms) forwards;
+  animation-delay:var(--reverse-delay);
+}
+
+@keyframes fall{
+  0%   { transform:translateY(-140%); opacity:0; }
+  60%  { opacity:1; }
+  100% { transform:translateY(0);     opacity:1; }
+}
+@keyframes rise{
+  from { transform:translateY(0);     opacity:1; }
+  to   { transform:translateY(-140%); opacity:0; }
+}
+
+/* Acessibilidade: reduz movimento */
+@media (prefers-reduced-motion: reduce){
+  .btn-wall:hover .brick,
+  .btn-wall.armed:not(:hover) .brick{
+    animation:none;
+    transform:translateY(0);
+    opacity:1;
+  }
+}

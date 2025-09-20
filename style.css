@@ -1,0 +1,501 @@
+/* ==================== Imports ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* ==================== Variáveis Globais ==================== */
+:root {
+  --nav-h: 64px;
+}
+
+/* ==================== Base / Reset ==================== */
+body {
+  margin: 0;
+  background: linear-gradient(100deg, #101010, #747474);
+  color: #fff;
+  min-height: 300vh;
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+a {
+  color: #FF4C09;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  transform: scale(1.04);
+  transition: .3s;
+}
+
+strong {
+  font-weight: 700;
+  color: #fff8f5;
+}
+
+/* ==================== Navegação (Sticky) ==================== */
+.nav-sticky {
+  position: sticky;
+  top: 0;
+  height: calc(var(--nav-h) + 10px);
+  background: transparent;
+  color: #111;
+  padding: 12px 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  transition: .4s ease-in;
+}
+
+.nav-sticky.scrolled {
+  background: linear-gradient(100deg, #141414, #696969);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: 0.7s;
+  height: var(--nav-h);
+}
+
+.nav-sticky > a > .bi-whatsapp {
+  font-size: 40px;
+  color: #18c438;
+  transition: .2s;
+}
+
+.nav-sticky > a > .bi-whatsapp:hover {
+  font-size: 40px;
+  transform: scale(1.04);
+  color: #19da3c;
+  transition: .2s;
+}
+
+.nav-sticky > a > img,
+.nav-sticky > a > i {
+  height: 60px;
+}
+
+.nav-sticky > a:first-child { margin-right: auto; }
+.nav-sticky > a:last-child { margin-left: auto; }
+
+.href-nav-group {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  white-space: nowrap;
+}
+
+/* ==================== Hero 3D ==================== */
+.hero-3d {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - var(--nav-h));
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-3d > canvas.obj3d {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  width: 100%;
+  height: calc(100dvh - var(--nav-h));
+  object-fit: cover;
+  pointer-events: none;
+  background: transparent;
+  z-index: 10;
+}
+
+.hero-copy {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: end;
+  max-width: 900px;
+  padding: 20px;
+  z-index: 20;
+  margin-right: 10vw;
+  margin-bottom: 90px;
+}
+
+.hero-copy p{
+  text-indent: 20px;
+}
+
+/* ==================== Seção de Métricas ==================== */
+.container-metrics-section {
+  background: #101010;
+  display: grid;
+  grid-template-columns: minmax(800px, 450px) 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 70px 70px;
+  width: 100%;
+  margin: 50px auto 0;
+}
+
+.container-metrics-copy { margin-left: 10vw; width: 30vw; }
+.container-metrics-copy h1 { margin-bottom: 2vw; width: 60vw; }
+
+/* ==================== Canvas ==================== */
+canvas.obj3d-2 {
+  width: 100%;
+  height: 50vh;
+  display: block;
+  pointer-events: none;
+  background: transparent;
+  z-index: 10;
+}
+
+canvas.obj3d {
+  width: 100%;
+  height: 100dvh;
+  display: block;
+  pointer-events: none;
+  background: transparent;
+  z-index: 10;
+}
+
+/* ==================== Cards / Applications ==================== */
+.applications {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: .2s;
+}
+
+.applications:hover { transform: scale(1.06); transition: .2s; }
+
+.card-applications { transition: .2s; }
+.card-applications:hover { transform: scale(1.04); transition: .2s; }
+
+.applications > div { text-align: start; width: 70%; }
+.applications > i { margin-top: 15px; align-self: center; width: 10%; }
+
+/* ==================== Divisores ==================== */
+.division-line {
+  width: 1px;
+  height: 100%;
+  background: #FF4C09;
+}
+
+#division-line-hr {
+  margin: 0 9vw;
+  color: #FF4C09;
+  opacity: 100%;
+  border-radius: 20px;
+  border: 2px solid #FF4C09;
+}
+
+/* ==================== Seção de Vantagens ==================== */
+.advantages-section {
+  background: #101010;
+  align-items: center;
+  padding: 0 70px;
+  width: 100%;
+  margin: auto;
+}
+
+.card-advantages,
+.card-advantages div { transition: .5s; }
+
+.card-advantages:hover { transform: scale(1.05); transition: .5s; }
+
+.card-advantages:hover div { transform: scale(0.85); transition: .5s; }
+
+.advantages-section > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.advantages-section > ul > li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+}
+
+.advantages-section > ul > li::before {
+  font-family: "bootstrap-icons";
+  content: "\F4FE";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #FF4C09;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.container { margin-bottom: 5vh; }
+
+/* ==================== Formulários ==================== */
+#contato_email:focus,
+#contato_mensagem:focus {
+  border: 1px solid #FF4C09;
+  outline: none;
+  box-shadow: 1px 1px 5px #FF4C09;
+}
+
+#contato_email,
+#contato_mensagem {
+  border: 1px solid #eeeeee;
+}
+
+/* ==================== Nav Mobile (Hambúrguer) ==================== */
+.nav-sticky .nav-inner {
+  height: var(--nav-h, 64px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-sticky .brand img {
+  height: 48px;
+  display: block;
+}
+
+.nav-sticky .nav-phone {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: #FF4C09;
+  cursor: pointer;
+  position: relative;
+  transition: 1s;
+}
+
+.nav-toggle span {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform .25s, opacity .2s, top .25s;
+}
+
+.nav-toggle span:nth-child(1) { top: 12px; }
+.nav-toggle span:nth-child(2) { top: 19px; }
+.nav-toggle span:nth-child(3) { top: 26px; }
+
+.nav-toggle.is-open span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+/* ==================== Painel Mobile ==================== */
+#mobile-menu,
+.mobile-panel,
+.mobile-drawer {
+  position: absolute;
+  right: 0;
+  top: var(--nav-h, 64px);
+  background: #101010;
+  border-radius: 0 0 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 999;
+  width: 30vw;
+}
+
+#mobile-menu[data-open="true"],
+.mobile-panel[data-open="true"],
+.mobile-drawer[data-open="true"] {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 0;
+  transition: .5s;
+}
+
+.mobile-list,
+.mobile-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+}
+
+.mobile-list a,
+.mobile-drawer__nav a {
+  color: #FF4C09;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .4px;
+  margin-top: 30px;
+}
+
+/* ==================== Utilitários ==================== */
+.text-orange { color: #FF4C09; }
+
+.btn-orange {
+  background: #FF4C09;
+  color: #fff;
+  border: none;
+}
+
+.btn-orange:hover {
+  background: #fff;
+  color: #FF4C09;
+}
+
+/* ==================== Rodapé ==================== */
+.site-footer {
+  height: 37vh;
+  background: #222222;
+  color: #e6edf3;
+}
+
+.site-footer .text-muted { color: #e6edf3 !important; }
+.site-footer h5 { color: #fff; }
+
+.footer-link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link:hover { color: #ff4c09; }
+
+/* ==================== Comportamento de Scroll ==================== */
+section { scroll-margin-top: var(--nav-h); }
+
+/* ==================== Fallbacks de Altura ==================== */
+@supports not (height: 100dvh) {
+  .hero-3d { height: calc(100vh - var(--nav-h)); }
+  canvas.obj3d { height: 100vh; }
+}
+
+/* ==================== Breakpoint ≤ 1280px ==================== */
+@media (max-width: 1280px) {
+  .href-nav-group { display: none; }
+  .nav-toggle { display: inline-block; margin-left: 20px; }
+
+  .container-metrics-section {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    justify-items: center;
+  }
+
+  .site-footer {
+    height: 50vh;
+  }
+
+  .container-metrics-copy {
+    margin: 80px 0 0;
+    width: clamp(320px, 65vw, 900px);
+    justify-self: center;
+    text-align: center;
+  }
+
+  canvas.obj3d-2 {
+    width: min(100%, 980px);
+    height: 55vh;
+    margin-bottom: 40px;
+  }
+
+  .hero-copy {
+    top: 5%;
+    right: 16px;
+    padding: 40px;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== Breakpoint ≤ 980px ==================== */
+@media (max-width: 980px) {
+  .container-metrics-section { grid-template-columns: 1fr; }
+
+  .href-nav-group {
+    gap: 12px;
+    white-space: normal;
+  }
+
+  canvas.obj3d-2 { height: 40vh; }
+
+  .hero-3d {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .hero-copy {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+    text-align: center;
+    max-width: none;
+    font-size: 2.5vw;
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .hero-3d > canvas.obj3d {
+    grid-column: 1;
+    grid-row: 2;
+    position: relative;
+    top: -50px;
+    height: 55vh;
+  }
+
+  .row { flex-direction: column; }
+
+  .card-applications { width: 80vw;  margin-left: 15%;}
+
+  .site-footer {
+    height: 80vh;
+  }
+  
+}
+
+/* ==================== Breakpoint ≤ 767px ==================== */
+@media (max-width: 767px) {
+  .row { flex-direction: row; }
+
+  .card-applications { width: inherit;  margin-left: 0;}
+}
+
+/* ==================== Breakpoint ≤ 700px ==================== */
+@media (max-width: 700px) {
+  .hero-copy { font-size: 3.3vw; }
+
+  #mobile-menu,
+  .mobile-panel,
+  .mobile-drawer {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+  }
+
+  .mobile-drawer__nav {
+    width: 70%;
+    height: 100vh;
+    text-align: center;
+  }
+
+  .mobile-drawer__nav a:hover {
+    background: #2c2c2c;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .site-footer {
+    height: 80vh;
+  }
+}
