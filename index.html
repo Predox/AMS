@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <!-- ==================== CSS / Ícones ==================== -->
+  <link rel="preconnect" href="imgs/" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="gallery.css">
@@ -183,18 +184,68 @@
         </div>
       </div>
   
-      <!-- Grid 2: previews independentes (carrossel) -->
-      <div class="row g-4 mt-3">
-        <div class="col-12 col-md-4">
-          <div class="card border-0 shadow-sm app-gallery-card" data-gallery="residencial"></div>
+      <!-- Grid 2: previews independentes -->
+<div class="row g-4 mt-3">
+  <!-- RESIDENCIAIS -->
+  <div class="col-12 col-md-4">
+    <div class="card border-0 shadow-sm app-gallery-card" data-gallery="residencial" data-gallery-count="8">
+      <div class="app-card-gallery">
+        <img alt="" decoding="async" loading="lazy">
+        <div class="app-card-gallery__nav">
+          <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar">
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
-        <div class="col-12 col-md-4">
-          <div class="card border-0 shadow-sm app-gallery-card" data-gallery="comercial"></div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="card border-0 shadow-sm app-gallery-card" data-gallery="industrial"></div>
+        <div class="app-card-gallery__cta">
+          <button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- COMERCIAIS -->
+  <div class="col-12 col-md-4">
+    <div class="card border-0 shadow-sm app-gallery-card" data-gallery="comercial" data-gallery-count="8">
+      <div class="app-card-gallery">
+        <img alt="" decoding="async" loading="lazy">
+        <div class="app-card-gallery__nav">
+          <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="app-card-gallery__cta">
+          <button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDUSTRIAIS -->
+  <div class="col-12 col-md-4">
+    <div class="card border-0 shadow-sm app-gallery-card" data-gallery="industrial" data-gallery-count="8">
+      <div class="app-card-gallery">
+        <img alt="" decoding="async" loading="lazy">
+        <div class="app-card-gallery__nav">
+          <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="app-card-gallery__cta">
+          <button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   
       <p class="mt-5 text-center">
         Graças à união da tradição da <strong>AMS Lajes</strong> e da tecnologia <strong>Blocok</strong>, cada aplicação

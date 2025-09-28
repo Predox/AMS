@@ -1,22 +1,20 @@
 (function () {
-  // Prioriza formatos leves primeiro
   const EXTENSIONS = ['.webp', '.jpg', '.jpeg', '.png'];
   const MAX_PICS = 50;
 
-  // ---- Helpers -------------------------------------------------------------
+  const q = (sel, el=document) => el.querySelector(sel);
+  const qa = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 
-  // Carrega uma imagem e resolve com a URL se ok, senão null
   function probe(url) {
     return new Promise((resolve) => {
       const img = new Image();
       img.decoding = 'async';
       img.onload = () => resolve(url);
       img.onerror = () => resolve(null);
-      img.src = url; // sem cache-busting (melhor cache)
+      img.src = url; // sem cache-busting para aproveitar cache
     });
   }
 
-  // Acha rapidamente a PRIMEIRA imagem existente (1.webp -> 1.jpg -> ...)
   async function findFirstImage(folder) {
     for (const ext of EXTENSIONS) {
       const url = `imgs/${folder}/1${ext}`;
@@ -26,7 +24,6 @@
     return null;
   }
 
-  // Descobre TODAS as imagens (1..N) em paralelo leve, parando no primeiro "buraco"
   async function discoverAll(folder, countHint) {
     const found = [];
     const limit = Math.min(MAX_PICS, Math.max(1, countHint || MAX_PICS));
@@ -39,41 +36,42 @@
         if (ok) break;
       }
       if (ok) found.push(ok);
-      else break; // para no primeiro gap
+      else break;
     }
     return found;
   }
 
-  // ---- Mini-galeria (preview no card) -------------------------------------
+  function wireMiniGallery(cardEl, images) {
+    const wrap = q('.app-card-gallery', cardEl) || cardEl; // fallback
+    const img = q('img', wrap) || document.createElement('img');
+    if (!img.parentElement) wrap.appendChild(img);
 
-  function createMiniGallery(cardEl, images) {
-    const wrap = document.createElement('div');
-    wrap.className = 'app-card-gallery';
-    wrap.style.backgroundColor = '#000'; // evita clarão no fade
+    const nav = q('.app-card-gallery__nav', wrap) || document.createElement('div');
+    if (!nav.parentElement) {
+      nav.className = 'app-card-gallery__nav';
+      nav.innerHTML = `
+        <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar"><i class="fas fa-chevron-left"></i></button>
+        <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar"><i class="fas fa-chevron-right"></i></button>
+      `;
+      wrap.appendChild(nav);
+    }
 
-    const img = document.createElement('img');
-    img.alt = '';
-    img.decoding = 'async';
-    img.loading = 'lazy';
-    img.style.transition = 'opacity 420ms ease';
+    const cta = q('.app-card-gallery__cta', wrap) || document.createElement('div');
+    if (!cta.parentElement) {
+      cta.className = 'app-card-gallery__cta';
+      cta.innerHTML = `<button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>`;
+      wrap.appendChild(cta);
+    }
+
+    // anti “clarão”
+    wrap.style.backgroundColor = wrap.style.backgroundColor || '#000';
+    img.style.transition = img.style.transition || 'opacity 420ms ease';
     img.style.opacity = '1';
-    wrap.appendChild(img);
-
-    const nav = document.createElement('div');
-    nav.className = 'app-card-gallery__nav';
-    nav.innerHTML = `
-      <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar"><i class="fas fa-chevron-left"></i></button>
-      <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar"><i class="fas fa-chevron-right"></i></button>
-    `;
-    wrap.appendChild(nav);
-
-    const cta = document.createElement('div');
-    cta.className = 'app-card-gallery__cta';
-    cta.innerHTML = `<button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>`;
-    wrap.appendChild(cta);
+    // prioridade para a 1ª imagem (carrega logo)
+    img.loading = 'eager';
+    img.fetchPriority = 'high';
 
     let idx = 0;
-
     function show(i, opts = {}) {
       if (!images.length) return;
       idx = (i + images.length) % images.length;
@@ -83,15 +81,11 @@
         img.src = newSrc;
         return;
       }
-
-      // Fade suave sem ir a 0 (evita “clarão”)
       img.style.opacity = '0.45';
       setTimeout(() => {
         img.src = newSrc;
-        img.onload = () => {
-          img.style.opacity = '1';
-        };
-      }, 140);
+        img.onload = () => { img.style.opacity = '1'; };
+      }, 120);
     }
 
     // Primeira imagem imediata
@@ -107,7 +101,6 @@
       }
     });
 
-    // Acessibilidade: teclado
     wrap.tabIndex = 0;
     wrap.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') show(idx + 1);
@@ -115,23 +108,16 @@
       if (e.key === 'Enter' || e.key === ' ') openLightbox(images, idx);
     });
 
-    // Coloca o preview dentro do card de preview (grid independente)
-    cardEl.innerHTML = '';
-    cardEl.appendChild(wrap);
-
-    // Retorna uma API simples para atualizar a lista quando descobrirmos o resto
     return {
       replaceImages(newList) {
         images.splice(0, images.length, ...newList);
-        // mantém a imagem atual se ainda existir; caso contrário, reseta
         idx = Math.min(idx, images.length - 1);
         show(idx, { immediate: true });
       },
     };
   }
 
-  // ---- Lightbox (maximizado) ----------------------------------------------
-
+  // Lightbox (igual ao anterior, suavizado)
   let lightboxEl = null;
   function ensureLightbox() {
     if (lightboxEl) return lightboxEl;
@@ -164,8 +150,8 @@
 
   function openLightbox(images, startIdx = 0) {
     const lb = ensureLightbox();
-    const imgEl = lb.querySelector('.app-lightbox__img');
-    const pager = lb.querySelector('.app-lightbox__pager');
+    const imgEl = q('.app-lightbox__img', lb);
+    const pager = q('.app-lightbox__pager', lb);
     let idx = startIdx;
 
     function show(i) {
@@ -175,9 +161,7 @@
       imgEl.style.opacity = '0.45';
       setTimeout(() => {
         imgEl.src = src;
-        imgEl.onload = () => {
-          imgEl.style.opacity = '1';
-        };
+        imgEl.onload = () => { imgEl.style.opacity = '1'; };
         pager.textContent = `${idx + 1}/${images.length}`;
       }, 100);
     }
@@ -185,7 +169,7 @@
     show(idx);
     lb.classList.add('is-open');
 
-    lb.querySelectorAll('.app-lightbox__btn').forEach((btn) => {
+    qa('.app-lightbox__btn', lb).forEach((btn) => {
       btn.onclick = () => show(idx + parseInt(btn.dataset.dir, 10));
     });
 
@@ -203,52 +187,47 @@
     if (lightboxEl._onKey) window.removeEventListener('keydown', lightboxEl._onKey);
   }
 
-  // ---- Inicialização progressiva por card ---------------------------------
+  // --------- Opção A: hidratar TODOS os cards quando a seção entrar ---------
 
   function initCardProgressive(card) {
     const folder = card.dataset.gallery;
     if (!folder) return;
-
     const countHint = parseInt(card.dataset.galleryCount || '0', 10) || null;
 
-    // 1) Mostra a PRIMEIRA imagem já
     (async () => {
+      // 1) Primeira imagem já
       const first = await findFirstImage(folder);
       if (!first) return;
 
       const images = [first];
-      const api = createMiniGallery(card, images);
+      const api = wireMiniGallery(card, images);
 
-      // 2) Em paralelo, descobre todas e atualiza a galeria sem piscar
+      // 2) Descobre o resto em paralelo e atualiza
       const all = await discoverAll(folder, countHint);
-      if (all && all.length > 0) {
-        api.replaceImages(all);
-      }
+      if (all && all.length) api.replaceImages(all);
     })();
   }
 
-  // Usa IntersectionObserver para só iniciar quando o card estiver perto da viewport
-  function lazyObserve(card) {
-    const io = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting || e.intersectionRatio > 0) {
-            initCardProgressive(card);
-            obs.unobserve(card);
-          }
-        });
-      },
-      { root: null, rootMargin: '200px 0px', threshold: 0.01 }
-    );
-    io.observe(card);
+  function hydrateAllInSection() {
+    const cards = document.querySelectorAll('.app-gallery-card');
+    cards.forEach(initCardProgressive);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.nav-sticky');
     if (nav) nav.style.zIndex = Math.max(2000, parseInt(getComputedStyle(nav).zIndex || '2000', 10));
 
-    // Cards de preview independentes (segundo grid)
-    const cards = document.querySelectorAll('.app-gallery-card');
-    cards.forEach(lazyObserve);
+    const section = document.querySelector('#aplicacoes');
+    if (!section) return;
+
+    // Observa a seção; quando entrar (ou estiver perto), hidrata todos os cards juntos
+    const io = new IntersectionObserver((entries, obs) => {
+      if (entries.some(e => e.isIntersecting || e.intersectionRatio > 0)) {
+        hydrateAllInSection();
+        obs.unobserve(section);
+      }
+    }, { root: null, rootMargin: '600px 0px', threshold: 0.05 });
+
+    io.observe(section);
   });
 })();
