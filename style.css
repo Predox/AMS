@@ -9,7 +9,7 @@
 /* ==================== Base / Reset ==================== */
 body {
   margin: 0;
-  background: linear-gradient(100deg, #101010, #747474);
+  background: linear-gradient(100deg, #0A113D, #6e92c4);
   color: #fff;
   min-height: 300vh;
   overflow-x: hidden;
@@ -50,7 +50,7 @@ strong {
 }
 
 .nav-sticky.scrolled {
-  background: linear-gradient(100deg, #141414, #696969);
+  background: linear-gradient(100deg, #0A113D, #6e92c4);
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   transition: 0.7s;
   height: var(--nav-h);
@@ -58,14 +58,14 @@ strong {
 
 .nav-sticky > a > .bi-whatsapp {
   font-size: 40px;
-  color: #18c438;
+  color: #3de65c;
   transition: .2s;
 }
 
 .nav-sticky > a > .bi-whatsapp:hover {
   font-size: 40px;
   transform: scale(1.04);
-  color: #19da3c;
+  color: #60e778;
   transition: .2s;
 }
 
@@ -127,7 +127,7 @@ strong {
 
 /* ==================== Seção de Métricas ==================== */
 .container-metrics-section {
-  background: #101010;
+  background: #050920;
   display: grid;
   grid-template-columns: minmax(800px, 450px) 1fr;
   gap: 24px;
@@ -160,10 +160,12 @@ canvas.obj3d {
 }
 
 /* ==================== Cards / Applications ==================== */
+
 .applications {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background: transparent;
   transition: .2s;
 }
 
@@ -192,7 +194,7 @@ canvas.obj3d {
 
 /* ==================== Seção de Vantagens ==================== */
 .advantages-section {
-  background: #101010;
+  background: #050920;
   align-items: center;
   padding: 0 70px;
   width: 100%;
@@ -304,7 +306,7 @@ canvas.obj3d {
   position: absolute;
   right: 0;
   top: var(--nav-h, 64px);
-  background: #101010;
+  background: #050920;
   border-radius: 0 0 20px 20px;
   border-top: 1px solid rgba(255, 255, 255, .06);
   transform: translateY(-8px);
@@ -349,17 +351,33 @@ canvas.obj3d {
   background: #FF4C09;
   color: #fff;
   border: none;
+  transition: .3s;
 }
 
 .btn-orange:hover {
   background: #fff;
   color: #FF4C09;
+  transition: .3s;
 }
+
+.btn-dark {
+  background: #0A113D;
+  color: #fff;
+  border: none;
+  transition: .3s;
+}
+
+.btn-dark:hover {
+  background: #0A113D;
+  color: #FF4C09;
+  transition: .3s;
+}
+
 
 /* ==================== Rodapé ==================== */
 .site-footer {
   height: 37vh;
-  background: #222222;
+  background: #050920;
   color: #e6edf3;
 }
 
