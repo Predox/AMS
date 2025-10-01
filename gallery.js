@@ -2,7 +2,7 @@
   const EXTENSIONS = ['.webp', '.jpg', '.jpeg', '.png'];
   const MAX_PICS = 50;
 
-  const q = (sel, el=document) => el.querySelector(sel);
+  const q  = (sel, el=document) => el.querySelector(sel);
   const qa = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 
   function probe(url) {
@@ -11,39 +11,75 @@
       img.decoding = 'async';
       img.onload = () => resolve(url);
       img.onerror = () => resolve(null);
-      img.src = url; // sem cache-busting para aproveitar cache
+      img.src = url; // aproveita cache
     });
   }
 
-  async function findFirstImage(folder) {
-    for (const ext of EXTENSIONS) {
-      const url = `imgs/${folder}/1${ext}`;
-      const ok = await probe(url);
-      if (ok) return ok;
+  // Tenta gerar par (low, high) para um índice i
+  async function findOnePair(folder, i) {
+    const base = `imgs/${folder}/`;
+    const lowCandidates = [
+      `${base}${i}-sm`,     // 1-sm
+      `${base}${i}_sm`,     // 1_sm
+      `${base}sm/${i}`,     // sm/1
+      `${base}thumbs/${i}`, // thumbs/1
+    ];
+    const hiCandidates = [
+      `${base}${i}`         // 1 (sem sufixo)
+    ];
+
+    let low = null, hi = null;
+
+    // baixa qualidade
+    for (const cand of lowCandidates) {
+      for (const ext of EXTENSIONS) {
+        const ok = await probe(cand + ext); // eslint-disable-line no-await-in-loop
+        if (ok) { low = ok; break; }
+      }
+      if (low) break;
     }
-    return null;
+
+    // alta qualidade
+    for (const cand of hiCandidates) {
+      for (const ext of EXTENSIONS) {
+        const ok = await probe(cand + ext); // eslint-disable-line no-await-in-loop
+        if (ok) { hi = ok; break; }
+      }
+      if (hi) break;
+    }
+
+    // fallback: se não achou low, mas achou hi, usa hi nas duas
+    if (!low && hi) low = hi;
+
+    // se nada encontrado, retorna null
+    if (!low) return null;
+
+    return { low, hi }; // hi pode ser null (só low existente)
   }
 
-  async function discoverAll(folder, countHint) {
+  // Primeira imagem (par low/hi) do índice 1
+  async function findFirstPair(folder) {
+    return findOnePair(folder, 1);
+  }
+
+  // Descobre até MAX_PICS pares (low, hi)
+  async function discoverAllPairs(folder, countHint) {
     const found = [];
     const limit = Math.min(MAX_PICS, Math.max(1, countHint || MAX_PICS));
     for (let i = 1; i <= limit; i++) {
-      let ok = null;
-      for (const ext of EXTENSIONS) {
-        const url = `imgs/${folder}/${i}${ext}`;
-        // eslint-disable-next-line no-await-in-loop
-        ok = await probe(url);
-        if (ok) break;
-      }
-      if (ok) found.push(ok);
-      else break;
+      // eslint-disable-next-line no-await-in-loop
+      const pair = await findOnePair(folder, i);
+      if (!pair) break;     // parou no primeiro índice inexistente
+      found.push(pair);
     }
     return found;
   }
 
-  function wireMiniGallery(cardEl, images) {
+  function wireMiniGallery(cardEl, pairs) {
+    // pairs: [{low, hi}, ...]
+
     const wrap = q('.app-card-gallery', cardEl) || cardEl; // fallback
-    const img = q('img', wrap) || document.createElement('img');
+    const img  = q('img', wrap) || document.createElement('img');
     if (!img.parentElement) wrap.appendChild(img);
 
     const nav = q('.app-card-gallery__nav', wrap) || document.createElement('div');
@@ -63,33 +99,50 @@
       wrap.appendChild(cta);
     }
 
-    // anti “clarão”
+    // anti “clarão” + perf
     wrap.style.backgroundColor = wrap.style.backgroundColor || '#000';
-    img.style.transition = img.style.transition || 'opacity 420ms ease';
-    img.style.opacity = '1';
-    // prioridade para a 1ª imagem (carrega logo)
-    img.loading = 'eager';
-    img.fetchPriority = 'high';
+    img.style.transition  = img.style.transition  || 'opacity 420ms ease';
+    img.style.opacity     = '1';
+    img.loading           = 'eager';  // 1ª imagem tem prioridade
+    img.fetchPriority     = 'high';
 
     let idx = 0;
-    function show(i, opts = {}) {
-      if (!images.length) return;
-      idx = (i + images.length) % images.length;
-      const newSrc = images[idx];
+    let showingHi = false;
 
-      if (opts.immediate) {
-        img.src = newSrc;
-        return;
-      }
+    function setSrcSmooth(url, { immediate=false } = {}) {
+      if (immediate) { img.src = url; return; }
       img.style.opacity = '0.45';
       setTimeout(() => {
-        img.src = newSrc;
+        img.src = url;
         img.onload = () => { img.style.opacity = '1'; };
       }, 120);
     }
 
-    // Primeira imagem imediata
+    async function upgradeToHiIfAvailable(i) {
+      const pair = pairs[i];
+      if (!pair || !pair.hi || showingHi) return;
+      // Pré-carrega a alta e troca suave
+      const ok = await probe(pair.hi);
+      if (ok) {
+        showingHi = true;
+        setSrcSmooth(pair.hi);
+      }
+    }
+
+    function show(i, opts = {}) {
+      if (!pairs.length) return;
+      idx = (i + pairs.length) % pairs.length;
+      const pair = pairs[idx];
+
+      showingHi = false;
+      setSrcSmooth(pair.low, opts);
+      // em background, tenta trocar para a alta
+      upgradeToHiIfAvailable(idx);
+    }
+
+    // Primeira imagem imediata (low), e tenta alta
     show(0, { immediate: true });
+    upgradeToHiIfAvailable(0);
 
     wrap.addEventListener('click', (e) => {
       const t = e.target;
@@ -97,27 +150,30 @@
         const dir = parseInt(t.closest('.app-card-gallery__btn').dataset.dir, 10);
         show(idx + dir);
       } else if (t.closest('.btn-see-more') || t === img) {
-        openLightbox(images, idx);
+        // Lightbox abre com hi se existir, senão low
+        openLightbox(pairs, idx);
       }
     });
 
     wrap.tabIndex = 0;
     wrap.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') show(idx + 1);
-      if (e.key === 'ArrowLeft') show(idx - 1);
-      if (e.key === 'Enter' || e.key === ' ') openLightbox(images, idx);
+      if (e.key === 'ArrowLeft')  show(idx - 1);
+      if (e.key === 'Enter' || e.key === ' ') openLightbox(pairs, idx);
     });
 
     return {
-      replaceImages(newList) {
-        images.splice(0, images.length, ...newList);
-        idx = Math.min(idx, images.length - 1);
+      replacePairs(newPairs) {
+        pairs.splice(0, pairs.length, ...newPairs);
+        idx = Math.min(idx, pairs.length - 1);
+        showingHi = false;
         show(idx, { immediate: true });
+        upgradeToHiIfAvailable(idx);
       },
     };
   }
 
-  // Lightbox (igual ao anterior, suavizado)
+  // Lightbox — usa HI quando existir
   let lightboxEl = null;
   function ensureLightbox() {
     if (lightboxEl) return lightboxEl;
@@ -148,21 +204,25 @@
     return lightboxEl;
   }
 
-  function openLightbox(images, startIdx = 0) {
+  function openLightbox(pairs, startIdx = 0) {
     const lb = ensureLightbox();
     const imgEl = q('.app-lightbox__img', lb);
     const pager = q('.app-lightbox__pager', lb);
     let idx = startIdx;
 
-    function show(i) {
-      if (!images.length) return;
-      idx = (i + images.length) % images.length;
-      const src = images[idx];
+    async function show(i) {
+      if (!pairs.length) return;
+      idx = (i + pairs.length) % pairs.length;
+      const pair = pairs[idx];
+      const prefer = pair.hi || pair.low;
+
       imgEl.style.opacity = '0.45';
-      setTimeout(() => {
-        imgEl.src = src;
+      setTimeout(async () => {
+        // tenta garantir a HI antes de pintar (se existir)
+        const chosen = pair.hi ? (await probe(pair.hi)) || pair.low : pair.low;
+        imgEl.src = chosen;
         imgEl.onload = () => { imgEl.style.opacity = '1'; };
-        pager.textContent = `${idx + 1}/${images.length}`;
+        pager.textContent = `${idx + 1}/${pairs.length}`;
       }, 100);
     }
 
@@ -175,7 +235,7 @@
 
     function onKey(e) {
       if (e.key === 'ArrowRight') show(idx + 1);
-      if (e.key === 'ArrowLeft') show(idx - 1);
+      if (e.key === 'ArrowLeft')  show(idx - 1);
     }
     window.addEventListener('keydown', onKey, { passive: true });
     lb._onKey = onKey;
@@ -188,23 +248,22 @@
   }
 
   // --------- Opção A: hidratar TODOS os cards quando a seção entrar ---------
-
   function initCardProgressive(card) {
     const folder = card.dataset.gallery;
     if (!folder) return;
     const countHint = parseInt(card.dataset.galleryCount || '0', 10) || null;
 
     (async () => {
-      // 1) Primeira imagem já
-      const first = await findFirstImage(folder);
-      if (!first) return;
+      // 1) Primeira imagem já (par low/hi do índice 1)
+      const firstPair = await findFirstPair(folder);
+      if (!firstPair) return;
 
-      const images = [first];
-      const api = wireMiniGallery(card, images);
+      const pairs = [firstPair];
+      const api = wireMiniGallery(card, pairs);
 
       // 2) Descobre o resto em paralelo e atualiza
-      const all = await discoverAll(folder, countHint);
-      if (all && all.length) api.replaceImages(all);
+      const all = await discoverAllPairs(folder, countHint);
+      if (all && all.length) api.replacePairs(all);
     })();
   }
 

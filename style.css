@@ -163,6 +163,7 @@ canvas.obj3d {
 
 .applications {
   display: flex;
+  height: 100px;
   justify-content: space-around;
   align-items: center;
   background: transparent;
@@ -487,6 +488,17 @@ section { scroll-margin-top: var(--nav-h); }
   .row { flex-direction: row; }
 
   .card-applications { width: inherit;  margin-left: 0;}
+
+  .container-metrics-copy {
+    font-size: 0.7em;
+  }
+
+  .container-metrics-copy h1{
+    width: auto;
+    font-size: 3em;
+  }
+
+  .text-muted { font-size: 0.7em !important; }
 }
 
 /* ==================== Breakpoint ≤ 700px ==================== */
@@ -514,6 +526,6 @@ section { scroll-margin-top: var(--nav-h); }
   }
 
   .site-footer {
-    height: 80vh;
+    height: auto;
   }
 }

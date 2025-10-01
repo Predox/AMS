@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <title>Blocok Fraiburgo</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Blocok em Fraiburgo — sistema de vedação leve e eficiente. AMS Lajes: 25 anos de experiência, suporte técnico e execução ágil para obras residenciais, comerciais e industriais." />
+  <meta name="description" content="Blocok em Fraiburgo — sistema de vedação leve e eficiente. AMS: 25 anos de experiência, suporte técnico e execução ágil para obras residenciais, comerciais e industriais." />
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Blocok Fraiburgo">
@@ -33,7 +33,7 @@
     <canvas class="obj3d"></canvas>
     <div class="hero-copy">
       <h1>Sobre a Empresa</h1>
-      <p>Com <strong>25 anos</strong> de experiência no ramo lajeiro, a AMS Lajes consolidou-se como referência em qualidade e confiança
+      <p>Com <strong>25 anos</strong> de experiência no ramo lajeiro, a AMS consolidou-se como referência em qualidade e confiança
         na construção civil. Há quase 5 anos, a empresa atua também como franqueada da tecnologia Blocok, trazendo
         inovação e eficiência para obras de diferentes portes.
         Mais do que fornecer produtos, a AMS se diferencia pelo suporte técnico especializado, oferecendo engenheiro em
@@ -73,7 +73,7 @@
   </nav>
 
   <!-- ==================== Produto / Métricas (Canvas 2) ==================== -->
-  <section class="container-metrics-section reveal" id="produto">
+  <section class="container-metrics-section" id="produto">
     <div>
       <div class="container-metrics-copy">
         <h1>O Produto: Blocok</h1>
@@ -89,7 +89,7 @@
   </section>
 
   <!-- ==================== Vantagens ==================== -->
-  <section class="advantages-section py-5 reveal" id="vantagens">
+  <section class="advantages-section py-5" id="vantagens">
     <div class="container">
       <h2 class="text-center mb-5">Vantagens do Blocok</h2>
       <div class="row g-4 text-center">
@@ -146,123 +146,133 @@
     </div>
   </section>
 
-  <!-- ==================== Aplicações ==================== -->
-  <section id="aplicacoes" class="py-5 reveal">
-    <div class="container">
-      <h2 class="text-center mb-4">Aplicações</h2>
-      <p class="text-center mb-5">O sistema Blocok é ideal para diferentes tipos de obras:</p>
-  
-      <!-- Grid 1: cards informativos -->
-      <div class="row g-4">
-        <div class="col-12 col-md-4">
+<!-- ==================== Aplicações ==================== -->
+<section id="aplicacoes" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Aplicações</h2>
+    <p class="text-center mb-5">O sistema Blocok é ideal para diferentes tipos de obras:</p>
+
+    <div class="row g-4">
+      <!-- ==================== RESIDENCIAIS ==================== -->
+      <div class="col-12 col-md-4">
+        <div class="application-item d-flex flex-column gap-3">
+          <!-- Card informativo -->
           <div class="card h-100 border-0 shadow-sm card-applications" data-reveal-delay="200">
             <div class="card-body text-center p-4 applications">
               <i class="fas fa-home fa-2x text-orange mb-3" aria-hidden="true"></i>
-              <span class="division-line"></span>
+              <span class="division-line" aria-hidden="true"></span>
               <div>
                 <h5 class="fw-bold mb-2">Residenciais</h5>
                 <p class="mb-0 text-muted">Casas, sobrados e condomínios.</p>
               </div>
             </div>
           </div>
+
+          <!-- Preview (mini-galeria) -->
+          <div class="card border-0 shadow-sm app-gallery-card" data-gallery="residencial" data-gallery-count="8">
+            <div class="app-card-gallery" aria-label="Galeria Residenciais">
+              <img alt="Exemplo de obra residencial com Blocok" decoding="async" loading="lazy">
+              <div class="app-card-gallery__nav">
+                <button class="app-card-gallery__btn" data-dir="-1" aria-label="Imagem anterior (Residenciais)">
+                  <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button class="app-card-gallery__btn" data-dir="1" aria-label="Próxima imagem (Residenciais)">
+                  <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="app-card-gallery__cta">
+                <button class="btn-see-more" aria-label="Ver mais imagens de Residenciais">
+                  <i class="fa-solid fa-maximize" aria-hidden="true"></i> Ver mais
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-  
-        <div class="col-12 col-md-4">
+      </div>
+
+      <!-- ==================== COMERCIAIS ==================== -->
+      <div class="col-12 col-md-4">
+        <div class="application-item d-flex flex-column gap-3">
+          <!-- Card informativo -->
           <div class="card h-100 border-0 shadow-sm card-applications" data-reveal-delay="200">
             <div class="card-body text-center p-4 applications">
               <i class="fas fa-building fa-2x text-orange mb-3" aria-hidden="true"></i>
-              <span class="division-line"></span>
+              <span class="division-line" aria-hidden="true"></span>
               <div>
                 <h5 class="fw-bold mb-2">Comerciais</h5>
                 <p class="mb-0 text-muted">Lojas, galpões e escritórios.</p>
               </div>
             </div>
           </div>
+
+          <!-- Preview (mini-galeria) -->
+          <div class="card border-0 shadow-sm app-gallery-card" data-gallery="comercial" data-gallery-count="8">
+            <div class="app-card-gallery" aria-label="Galeria Comerciais">
+              <img alt="Exemplo de obra comercial com Blocok" decoding="async" loading="lazy">
+              <div class="app-card-gallery__nav">
+                <button class="app-card-gallery__btn" data-dir="-1" aria-label="Imagem anterior (Comerciais)">
+                  <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button class="app-card-gallery__btn" data-dir="1" aria-label="Próxima imagem (Comerciais)">
+                  <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="app-card-gallery__cta">
+                <button class="btn-see-more" aria-label="Ver mais imagens de Comerciais">
+                  <i class="fa-solid fa-maximize" aria-hidden="true"></i> Ver mais
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-  
-        <div class="col-12 col-md-4">
+      </div>
+
+      <!-- ==================== INDUSTRIAIS ==================== -->
+      <div class="col-12 col-md-4">
+        <div class="application-item d-flex flex-column gap-3">
+          <!-- Card informativo -->
           <div class="card h-100 border-0 shadow-sm card-applications" data-reveal-delay="200">
             <div class="card-body text-center p-4 applications">
               <i class="fas fa-industry fa-2x text-orange mb-3" aria-hidden="true"></i>
-              <span class="division-line"></span>
+              <span class="division-line" aria-hidden="true"></span>
               <div>
                 <h5 class="fw-bold mb-2">Industriais</h5>
                 <p class="mb-0 text-muted">Fábricas, depósitos e estruturas de maior porte.</p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-  
-      <!-- Grid 2: previews independentes -->
-<div class="row g-4 mt-3">
-  <!-- RESIDENCIAIS -->
-  <div class="col-12 col-md-4">
-    <div class="card border-0 shadow-sm app-gallery-card" data-gallery="residencial" data-gallery-count="8">
-      <div class="app-card-gallery">
-        <img alt="" decoding="async" loading="lazy">
-        <div class="app-card-gallery__nav">
-          <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="app-card-gallery__cta">
-          <button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- COMERCIAIS -->
-  <div class="col-12 col-md-4">
-    <div class="card border-0 shadow-sm app-gallery-card" data-gallery="comercial" data-gallery-count="8">
-      <div class="app-card-gallery">
-        <img alt="" decoding="async" loading="lazy">
-        <div class="app-card-gallery__nav">
-          <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="app-card-gallery__cta">
-          <button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>
+          <!-- Preview (mini-galeria) -->
+          <div class="card border-0 shadow-sm app-gallery-card" data-gallery="industrial" data-gallery-count="8">
+            <div class="app-card-gallery" aria-label="Galeria Industriais">
+              <img alt="Exemplo de obra industrial com Blocok" decoding="async" loading="lazy">
+              <div class="app-card-gallery__nav">
+                <button class="app-card-gallery__btn" data-dir="-1" aria-label="Imagem anterior (Industriais)">
+                  <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button class="app-card-gallery__btn" data-dir="1" aria-label="Próxima imagem (Industriais)">
+                  <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="app-card-gallery__cta">
+                <button class="btn-see-more" aria-label="Ver mais imagens de Industriais">
+                  <i class="fa-solid fa-maximize" aria-hidden="true"></i> Ver mais
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- INDUSTRIAIS -->
-  <div class="col-12 col-md-4">
-    <div class="card border-0 shadow-sm app-gallery-card" data-gallery="industrial" data-gallery-count="8">
-      <div class="app-card-gallery">
-        <img alt="" decoding="async" loading="lazy">
-        <div class="app-card-gallery__nav">
-          <button class="app-card-gallery__btn" data-dir="-1" aria-label="Voltar">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button class="app-card-gallery__btn" data-dir="1" aria-label="Avançar">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="app-card-gallery__cta">
-          <button class="btn-see-more"><i class="fa-solid fa-maximize"></i> Ver mais</button>
-        </div>
-      </div>
-    </div>
+    </div><!-- /row -->
+
+    <p class="mt-5 text-center">
+      Graças à união da tradição da <strong>AMS</strong> e da tecnologia <strong>Blocok</strong>, cada aplicação
+      resulta em um sistema construtivo moderno, econômico e confiável — ideal para quem busca qualidade e eficiência.
+    </p>
   </div>
-</div>
-  
-      <p class="mt-5 text-center">
-        Graças à união da tradição da <strong>AMS Lajes</strong> e da tecnologia <strong>Blocok</strong>, cada aplicação
-        resulta em um sistema construtivo moderno, econômico e confiável — ideal para quem busca qualidade e eficiência.
-      </p>
-    </div>
-  </section>
+</section>
+
 
   <!-- ==================== Divisor ==================== -->
   <hr id="division-line-hr">
@@ -275,7 +285,7 @@
           <div class="h-100 d-flex flex-column justify-content-center">
             <h2 class="mb-3">Agende um Orçamento</h2>
             <p>
-              Sua obra merece um sistema inteligente e seguro. Entre em contato com a AMS Lajes e descubra como o Blocok pode transformar o seu projeto.
+              Sua obra merece um sistema inteligente e seguro. Entre em contato com a AMS e descubra como o Blocok pode transformar o seu projeto.
             </p>
 
             <div class="d-grid gap-2 mt-3">
@@ -334,9 +344,9 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-12 col-md-4">
-          <img src="https://www.amslajes.com.br/public/img/logo.svg" alt="AMS Lajes" height="50" class="mb-3">
+          <img src="https://www.amslajes.com.br/public/img/logo.svg" alt="AMS" height="50" class="mb-3">
           <p class="text-muted">
-            A AMS Lajes atua há 25 anos no ramo lajeiro e é franqueada da tecnologia Blocok.
+            A AMS atua há 25 anos no ramo lajeiro e é franqueada da tecnologia Blocok.
             Inovação, eficiência e suporte técnico especializado para sua obra.
           </p>
         </div>

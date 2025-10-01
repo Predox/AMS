@@ -10,15 +10,18 @@
   margin-top: .75rem; border-radius: 16px;
 }
 
-.app-gallery-card { padding: 0; border-radius: 16px; overflow: hidden; }
-.app-gallery-card .app-card-gallery { margin: 0; border-radius: 16px; }
+.application-item .card + .card { margin-top: 0.5rem; }
+@media (min-width: 768px){ .application-item .card + .card { margin-top: 0.75rem; } }
+
+.app-gallery-card { padding: 0; border-radius: 10px; overflow: hidden; }
+.app-gallery-card .app-card-gallery { margin: 0; border-radius: 10px; }
 
 .app-card-gallery img {
   width: 100%;
   display: block;
   object-fit: cover;
   aspect-ratio: 4/3;     /* mantém proporção */
-  border-radius: 12px;
+  border-radius: 10px;
   transition: opacity 0.5s ease-in; /* suaviza a troca */
   opacity: 1;
 }
@@ -41,20 +44,20 @@
   pointer-events: all;
   width: 42px;
   height: 42px;
-  border: 2px solid #ff6a00;
-  background: #fff;
+  border: none;
+  background: transparent;
   border-radius: 999px;
   display: grid;
   place-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 3rem;
   line-height: 0;
-  box-shadow: 0 4px 14px rgba(0,0,0,.25);
-  color: #ff6a00;
+  color: #FF4C09;
+  transition: .2s;
 }
-.app-card-gallery__btn:hover { transform: translateY(-1px); }
+.app-card-gallery__btn:hover { transform: scale(1.05); color: #ffffff; transition: .2s; }
 
 .app-card-gallery__cta {
   position: absolute;
@@ -69,15 +72,17 @@
   gap: .5rem;
   font-weight: 600;
   font-size: .95rem;
-  background: #fff;
-  color: #ff6a00;
-  border: 2px solid #ff6a00;
+  background: transparent;
+  color: #FF4C09;
+  border: none;
   border-radius: 12px;
   padding: .35rem .6rem;
-  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  box-shadow: 0 4px 14px rgba(0,0,0,.09);
+  backdrop-filter: blur(5px) brightness(120%);
+  transition: .2s;
 }
-.btn-see-more i { font-size: .95rem; }
 
+.btn-see-more:hover  { color: #fff; transition: .2s;}
 /* ==================== Lightbox (fullscreen) ==================== */
 .app-lightbox {
   position: fixed;
@@ -135,15 +140,14 @@
   pointer-events: all;
   width: clamp(42px, 4.2vw, 56px);
   height: clamp(42px, 4.2vw, 56px);
-  border: 2px solid #ff6a00;
-  background: #fff;
+  border: none;
+  background: transparent;
   border-radius: 999px;
   display: grid;
   place-items: center;
-  font-size: 1.5rem;
+  font-size: 3rem;
   line-height: 0;
-  color: #ff6a00;
-  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  color: #FF4C09;
 }
 
 .app-lightbox__pager {
@@ -151,13 +155,13 @@
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #fff;
-  color: #ff6a00;
+  background: #ffffff;
+  color: #FF4C09;
   font-weight: 700;
   border-radius: 999px;
   padding: .35rem .8rem;
   box-shadow: 0 6px 18px rgba(0,0,0,.25);
-  border: 2px solid #ff6a00;
+  border: 2px solid #FF4C09;
 }
 
 /* Close area on background click: cursor */
